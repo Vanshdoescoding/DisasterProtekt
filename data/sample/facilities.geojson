@@ -1,0 +1,29 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "facility_id": "hospital-001",
+        "facility_type": "hospital",
+        "name": "Phoenix General"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-112.0740, 33.4484]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "facility_id": "shelter-001",
+        "facility_type": "shelter",
+        "name": "Downtown Cooling Shelter"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-112.0725, 33.4512]
+      }
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@dp/branching",
+  "version": "0.1.0",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "dependencies": {
+    "@dp/domain": "workspace:*",
+    "@dp/events": "workspace:*",
+    "@dp/infra": "workspace:*",
+    "@dp/utils": "workspace:*"
+  }
+}

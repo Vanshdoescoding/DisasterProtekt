@@ -1,0 +1,13 @@
+{
+  "name": "@dp/ingestion-cli",
+  "version": "0.1.0",
+  "private": true,
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "@dp/infra": "workspace:*",
+    "@dp/signals": "workspace:*"
+  }
+}
