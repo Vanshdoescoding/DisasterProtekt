@@ -1,0 +1,13 @@
+{
+  "name": "@dp/snapshot",
+  "version": "0.1.0",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "dependencies": {
+    "@dp/domain": "workspace:*",
+    "@dp/infra": "workspace:*",
+    "@dp/signals": "workspace:*",
+    "@dp/utils": "workspace:*",
+    "zod": "^3.23.8"
+  }
+}

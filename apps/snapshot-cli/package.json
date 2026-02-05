@@ -1,0 +1,14 @@
+{
+  "name": "@dp/snapshot-cli",
+  "version": "0.1.0",
+  "private": true,
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "@dp/infra": "workspace:*",
+    "@dp/snapshot": "workspace:*",
+    "@dp/utils": "workspace:*"
+  }
+}

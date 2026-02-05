@@ -1,0 +1,16 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {
+    "city": "sample"
+  },
+  "nodes": [
+    { "id": "n0", "lat": 33.4484, "lon": -112.0740 },
+    { "id": "n1", "lat": 33.4510, "lon": -112.0730 },
+    { "id": "n2", "lat": 33.4525, "lon": -112.0705 }
+  ],
+  "links": [
+    { "source": "n0", "target": "n1", "length_m": 420 },
+    { "source": "n1", "target": "n2", "length_m": 310 }
+  ]
+}

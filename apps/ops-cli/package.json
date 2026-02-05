@@ -1,0 +1,22 @@
+{
+  "name": "@dp/ops-cli",
+  "version": "0.1.0",
+  "private": true,
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "@dp/branching": "workspace:*",
+    "@dp/decisions": "workspace:*",
+    "@dp/domain": "workspace:*",
+    "@dp/events": "workspace:*",
+    "@dp/infra": "workspace:*",
+    "@dp/models": "workspace:*",
+    "@dp/sim-core": "workspace:*",
+    "@dp/snapshot": "workspace:*",
+    "@dp/signals": "workspace:*",
+    "@dp/trace-store": "workspace:*",
+    "@dp/utils": "workspace:*"
+  }
+}

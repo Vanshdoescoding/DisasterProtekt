@@ -1,0 +1,10 @@
+{
+  "name": "@dp/utils",
+  "version": "0.1.0",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "dependencies": {
+    "h3-js": "^4.1.0",
+    "ulid": "^2.3.0"
+  }
+}
