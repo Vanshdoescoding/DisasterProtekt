@@ -3,9 +3,11 @@ import { useBranchStore } from '@/store/branchStore';
 import { GitBranch, GitCommit } from 'lucide-react';
 import clsx from 'clsx';
 import { format } from 'date-fns';
+import { useQuery } from '@tanstack/react-query';
+import { apiClient } from '@/api/client';
 
 export function BranchTimeline() {
-    const { activeBranchId, branches, events, setActiveBranch } = useBranchStore();
+    const { activeBranchId, branches, events, setActiveBranch, runId } = useBranchStore();
 
     const branchList = useMemo(() => Object.values(branches), [branches]);
     const activeBranch = branches[activeBranchId];
@@ -34,9 +36,9 @@ export function BranchTimeline() {
                 </div>
             )}
 
-            <div className="bg-white/90 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 rounded-lg shadow-lg p-2 text-xs">
+            <div className="bg-white/90 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 rounded-lg shadow-lg p-2 text-xs w-64 max-h-[80vh] flex flex-col">
                 <div className="text-[10px] font-semibold text-slate-400 uppercase mb-2">Branch Compare</div>
-                <div className="flex flex-col gap-1">
+                <div className="flex flex-col gap-1 mb-4 shrink-0">
                     {branchList.map((branch) => (
                         <button
                             key={branch.id}
@@ -55,7 +57,61 @@ export function BranchTimeline() {
                         </button>
                     ))}
                 </div>
+
+                <div className="border-t border-slate-200 dark:border-slate-800 pt-2 flex-1 overflow-hidden flex flex-col">
+                    <div className="text-[10px] font-semibold text-slate-400 uppercase mb-2 shrink-0">Audit Log</div>
+                    <div className="overflow-y-auto min-h-0 flex-1 pr-1 space-y-2">
+                        {runId ? (
+                            <TimelineEvents runId={runId} branchId={activeBranchId} />
+                        ) : (
+                            <div className="text-slate-400 italic">No run active</div>
+                        )}
+                    </div>
+                </div>
             </div>
+        </div>
+    );
+}
+
+function TimelineEvents({ runId, branchId }: { runId: string, branchId: string }) {
+    const { data: events, isLoading, error } = useQuery({
+        queryKey: ['audit', 'timeline', runId, branchId],
+        queryFn: () => apiClient.getAuditTimeline(runId, branchId),
+        refetchInterval: 5000
+    });
+
+    if (isLoading) return <div className="animate-pulse space-y-2">
+        <div className="h-8 bg-slate-100 dark:bg-slate-800 rounded"></div>
+        <div className="h-8 bg-slate-100 dark:bg-slate-800 rounded"></div>
+        <div className="h-8 bg-slate-100 dark:bg-slate-800 rounded"></div>
+    </div>;
+
+    if (error) return <div className="text-red-500">Failed to load events</div>;
+
+    if (!events?.entries || events.entries.length === 0) {
+        return <div className="text-slate-400 italic">No events recorded</div>;
+    }
+
+    return (
+        <div className="space-y-3">
+            {events.entries.map((entry, idx) => (
+                <div key={idx} className="relative pl-3 border-l border-slate-200 dark:border-slate-800">
+                    <div className="absolute -left-[3px] top-1.5 w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-600"></div>
+                    <div className="flex flex-col gap-0.5">
+                        <div className="flex items-center justify-between">
+                            <span className="font-semibold text-slate-700 dark:text-slate-200 truncate pr-2" title={entry.category}>
+                                {entry.category}
+                            </span>
+                            <span className="text-[10px] text-slate-400 tabular-nums">
+                                {format(new Date(entry.occurred_at), 'HH:mm:ss')}
+                            </span>
+                        </div>
+                        <div className="text-slate-500 dark:text-slate-400 leading-tight">
+                            {entry.summary}
+                        </div>
+                    </div>
+                </div>
+            ))}
         </div>
     );
 }

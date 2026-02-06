@@ -8,8 +8,10 @@ interface BranchState {
     branches: Record<string, BranchNodeDTO>;
     events: Record<string, DomainEvent[]>;
     lastPlacementId: string | null;
+    runId: string | null;
 
     // Actions
+    setRunId: (runId: string) => void;
     createPlacement: (placement: OpPlacementDTO) => void;
     setActiveBranch: (branchId: string) => void;
 }
@@ -30,12 +32,14 @@ export const branchStoreDefaults = {
     events: {
         baseline: []
     },
-    lastPlacementId: null
+    lastPlacementId: null,
+    runId: '00000000-0000-0000-0000-000000000000' // Default/Mock run ID
 };
 
 export const useBranchStore = create<BranchState>((set) => ({
     ...branchStoreDefaults,
 
+    setRunId: (runId) => set({ runId }),
     setActiveBranch: (branchId) => {
         logClientEvent({ type: 'branch_switch', branchId });
         set({ activeBranchId: branchId });

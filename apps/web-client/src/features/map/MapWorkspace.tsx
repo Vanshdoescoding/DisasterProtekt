@@ -14,6 +14,8 @@ import { validatePlacement } from '../ops/placementValidation';
 import { OpPlacementDTO } from '@/services/api/types';
 import { logClientEvent } from '@/shared/logger';
 import clsx from 'clsx';
+import { HealthStatus } from '../observability/HealthStatus';
+import { DiffView } from '../audit/DiffView';
 
 const DEFAULT_COORDINATE: [number, number] = [-112.074, 33.448];
 
@@ -92,6 +94,8 @@ export function MapWorkspace() {
                     <LayerToggles />
                     <ResourceTray />
                     <BranchTimeline />
+                    <DiffView />
+                    <HealthStatus />
                     <EvidencePanel />
                     <UncertaintyToggle />
                     <TimeController />
