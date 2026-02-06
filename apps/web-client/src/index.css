@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-background: 255 255 255;
+    --color-foreground: 15 23 42;
+  }
+  
+  .dark {
+    --color-background: 2 6 23;
+    --color-foreground: 248 250 252;
+  }
+  
+  body {
+    @apply bg-slate-50 text-slate-950 dark:bg-slate-950 dark:text-slate-50;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
